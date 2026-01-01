@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>20 Video Viral - Verifikasi</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+body{margin:0;background:#0f0f0f;color:#fff;font-family:Arial}
+.overlay{
+position:fixed;inset:0;
+background:linear-gradient(135deg,#0f0f0f,#1a1a2e);
+display:flex;align-items:center;justify-content:center;
+z-index:9999;padding:15px}
+.box{
+background:#111;border:2px solid #ff4757;
+border-radius:15px;padding:30px;
+width:100%;max-width:480px;text-align:center}
+.box h2{color:#ff4757}
+.link-btn{
+width:100%;padding:12px;margin-top:8px;
+background:#ff4757;border:none;
+color:#fff;font-weight:bold;
+border-radius:8px;cursor:pointer}
+.link-btn.done{background:#00aa00}
+.progress-bar{background:#333;height:8px;border-radius:5px;margin:15px 0}
+.progress{background:#ff4757;height:100%;width:0%}
+.access-btn{
+display:none;margin-top:15px;
+background:#00aa00;color:#fff;
+padding:14px;font-size:16px;
+border:none;border-radius:8px;cursor:pointer}
+.content{display:none;padding:15px}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+gap:15px}
+.card{background:#1a1a1a;border-radius:8px;overflow:hidden}
+.thumb{position:relative;height:160px;cursor:pointer}
+.thumb video{width:100%;height:100%;object-fit:cover}
+.play{
+position:absolute;inset:0;
+display:flex;align-items:center;justify-content:center;
+font-size:40px;background:rgba(0,0,0,.4)}
+.title{padding:10px;font-weight:bold}
+</style>
+</head>
+<body>
+
+<!-- VERIFIKASI -->
+<div class="overlay" id="overlay">
+<div class="box">
+<h2>VERIFIKASI AKSES</h2>
+<p>Silakan klik <b>SEMUA 11 LINK</b> untuk membuka video</p>
+
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
+
+<button class="link-btn" onclick="openLink('https://s.shopee.co.id/9fEFxmUSTQ',this)">LINK 1</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9703244',this)">LINK 2</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9815426',this)">LINK 3</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9815424',this)">LINK 4</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/10071971',this)">LINK 5</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9703236',this)">LINK 6</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9815427',this)">LINK 7</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9815425',this)">LINK 8</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9815422',this)">LINK 9</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9815420',this)">LINK 10</button>
+<button class="link-btn" onclick="openLink('https://otieu.com/4/9815428',this)">LINK 11</button>
+
+<button class="access-btn" id="accessBtn" onclick="grantAccess()">
+BUKA VIDEO SEKARANG
+</button>
+</div>
+</div>
+
+<!-- VIDEO -->
+<div class="content" id="content">
+<h2 style="text-align:center;color:#ff4757">20 VIDEO VIRAL</h2>
+<div class="grid" id="grid"></div>
+</div>
+
+<script>
+let clicked=0;
+const total=11;
+
+const videos=[
+"https://cdn.videy.co/ASB09ik81.mp4",
+"https://cdn.videy.co/ASgIAmd61.mp4",
+"https://cdn.videy.co/ASlPKjNV1.mp4",
+"https://cdn.videy.co/aSMMnvHt1.mp4",
+"https://cdn.videy.co/aT4M6bxd1.mp4",
+"https://cdn.videy.co/atqWhfjZ1.mp4",
+"https://cdn.videy.co/Attvl5Sm1.mp4",
+"https://cdn.videy.co/atXESOpi1.mp4",
+"https://cdn.videy.co/Au5dhJGT1.mp4",
+"https://cdn.videy.co/AUvpvN4K1.mp4"
+];
+
+function openLink(url,btn){
+window.open(url,'_blank');
+if(!btn.classList.contains('done')){
+btn.classList.add('done');
+btn.innerHTML="✓ SUDAH DIKLIK";
+clicked++;
+document.getElementById('progress').style.width=(clicked/total*100)+"%";
+}
+if(clicked===total){
+setTimeout(()=>document.getElementById('accessBtn').style.display='block',1500);
+}
+}
+
+function grantAccess(){
+document.getElementById('overlay').style.display='none';
+document.getElementById('content').style.display='block';
+renderVideos();
+}
+
+function renderVideos(){
+const grid=document.getElementById('grid');
+videos.forEach((v,i)=>{
+const card=document.createElement('div');
+card.className='card';
+card.innerHTML=`
+<div class="thumb">
+<video src="${v}" muted></video>
+<div class="play"><i class="fas fa-play"></i></div>
+</div>
+<div class="title">VIDEO ${i+1}</div>`;
+card.onclick=()=>{
+const vid=card.querySelector('video');
+vid.controls=true;
+vid.play();
+};
+grid.appendChild(card);
+});
+}
+</script>
+
+</body>
+</html>
